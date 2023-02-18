@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Calculadora.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Calculadora.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Calculadora_Java</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.swing.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.EventObject</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Calculadora </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s0">implements </span><span class="s1">ActionListener {</span>
+
+    <span class="s0">private </span><span class="s1">JButton btnsuma</span><span class="s0">, </span><span class="s1">btnresta</span><span class="s0">, </span><span class="s1">btnmulti</span><span class="s0">, </span><span class="s1">btndiv</span><span class="s0">, </span><span class="s1">btnlimpar</span><span class="s0">, </span><span class="s1">btnraiz</span><span class="s0">, </span><span class="s1">btnpotencia</span><span class="s0">, </span><span class="s1">btnsalir</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JTextField valor1</span><span class="s0">, </span><span class="s1">valor2</span><span class="s0">, </span><span class="s1">camporesultado</span><span class="s0">;</span>
+    <span class="s1">JLabel label1</span><span class="s0">, </span><span class="s1">label2</span><span class="s0">;</span>
+
+
+    <span class="s0">public void </span><span class="s1">Controles () {</span>
+
+        <span class="s1">Container contenedor = getContentPane()</span><span class="s0">;</span>
+        <span class="s1">contenedor.setLayout(</span><span class="s0">new </span><span class="s1">FlowLayout())</span><span class="s0">;</span>
+        <span class="s1">label1 = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s2">&quot;Numero 1&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(label1)</span><span class="s0">;</span>
+        <span class="s1">valor1 = </span><span class="s0">new </span><span class="s1">JTextField(</span><span class="s3">10</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(valor1)</span><span class="s0">;</span>
+
+        <span class="s1">label2 = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s2">&quot;Numero 2&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(label2)</span><span class="s0">;</span>
+        <span class="s1">valor2 = </span><span class="s0">new </span><span class="s1">JTextField(</span><span class="s3">10</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(valor2)</span><span class="s0">;</span>
+
+        <span class="s1">btnsuma = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;+&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnsuma)</span><span class="s0">;</span>
+        <span class="s1">btnsuma.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">btnresta = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;-&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnresta)</span><span class="s0">;</span>
+        <span class="s1">btnresta.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">btnmulti = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;x&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnmulti)</span><span class="s0">;</span>
+        <span class="s1">btnmulti.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">btndiv = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;/&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btndiv)</span><span class="s0">;</span>
+        <span class="s1">btndiv.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">btnraiz = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;√&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnraiz)</span><span class="s0">;</span>
+        <span class="s1">btnraiz.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">btnpotencia = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;Pot&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnpotencia)</span><span class="s0">;</span>
+        <span class="s1">btnpotencia.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">camporesultado = </span><span class="s0">new </span><span class="s1">JTextField(</span><span class="s3">10</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(camporesultado)</span><span class="s0">;</span>
+
+        <span class="s1">btnlimpar = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;Limpar&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">btnlimpar.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnlimpar)</span><span class="s0">;</span>
+
+        <span class="s1">btnsalir = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;Salir&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">btnsalir.setBackground(Color.red)</span><span class="s0">;</span>
+        <span class="s1">contenedor.add(btnsalir)</span><span class="s0">;</span>
+        <span class="s1">btnsalir.addActionListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Calculadora() {</span>
+
+        <span class="s0">super</span><span class="s1">(</span><span class="s2">&quot;Calculadora&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s4">// cargo Controles</span>
+
+        <span class="s1">Controles()</span><span class="s0">;</span>
+        <span class="s1">setSize(</span><span class="s3">380</span><span class="s0">, </span><span class="s3">200</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setLocationRelativeTo(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setVisible(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">public void </span><span class="s1">actionPerformed (ActionEvent e) {</span>
+        <span class="s0">double </span><span class="s1">num1</span><span class="s0">, </span><span class="s1">num2</span><span class="s0">, </span><span class="s1">resu</span><span class="s0">;</span>
+        <span class="s1">String resultado</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(e.getSource() == btnsuma) {</span>
+            <span class="s0">if </span><span class="s1">(valor1.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">) || valor2.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Los datos no estan completos&quot;</span><span class="s0">,</span>
+                        <span class="s2">&quot;ERROR&quot;</span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">num1 = Double.parseDouble(valor1.getText())</span><span class="s0">;</span>
+                <span class="s1">num2 = Double.parseDouble(valor2.getText())</span><span class="s0">;</span>
+                <span class="s1">resu = num1 + num2</span><span class="s0">;</span>
+                <span class="s1">resultado = String.valueOf(resu)</span><span class="s0">;</span>
+                <span class="s1">camporesultado.setText(resultado)</span><span class="s0">;</span>
+
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+
+        <span class="s0">if </span><span class="s1">(e.getSource() == btnmulti) {</span>
+            <span class="s0">if </span><span class="s1">(valor1.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">) || valor2.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Los datos no estan completos&quot;</span><span class="s0">,</span>
+                        <span class="s2">&quot;ERROR&quot;</span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">num1 = Double.parseDouble(valor1.getText())</span><span class="s0">;</span>
+                <span class="s1">num2 = Double.parseDouble(valor2.getText())</span><span class="s0">;</span>
+                <span class="s1">resu = num1 * num2</span><span class="s0">;</span>
+                <span class="s1">resultado = String.valueOf(resu)</span><span class="s0">;</span>
+                <span class="s1">camporesultado.setText(resultado)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">if </span><span class="s1">(e.getSource() == btndiv) {</span>
+            <span class="s0">if </span><span class="s1">(valor1.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">) || valor2.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Los datos no estan completos&quot;</span><span class="s0">,</span>
+                        <span class="s2">&quot;ERROR&quot;</span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">num1=Double.parseDouble(valor1.getText())</span><span class="s0">;</span>
+                <span class="s1">num2=Double.parseDouble(valor2.getText())</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                  <span class="s1">resu=num1/num2</span><span class="s0">;</span>
+                  <span class="s1">resultado=String.valueOf(resu)</span><span class="s0">;</span>
+                  <span class="s1">camporesultado.setText(resultado.toString())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">catch </span><span class="s1">(ArithmeticException ex) {</span>
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Divisao entre cero no eres valida&quot; </span><span class="s0">,</span>
+                            <span class="s2">&quot;ERROR&quot;</span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">if </span><span class="s1">(e.getSource() == btnpotencia){</span>
+        <span class="s0">if </span><span class="s1">(valor1.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">) || valor2.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+            <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null,</span><span class="s2">&quot;Los datos no estan completos&quot;</span><span class="s0">,</span>
+                    <span class="s2">&quot;ERROR&quot; </span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">num1=Double.parseDouble(valor1.getText())</span><span class="s0">;</span>
+            <span class="s1">num2=Double.parseDouble(valor2.getText())</span><span class="s0">;</span>
+            <span class="s1">resu=Math.pow(num1</span><span class="s0">, </span><span class="s1">num2)</span><span class="s0">;</span>
+            <span class="s1">resultado=String.valueOf(resu)</span><span class="s0">;</span>
+            <span class="s1">camporesultado.setText(resultado)</span><span class="s0">;</span>
+
+           <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">if </span><span class="s1">(e.getSource() == btnraiz){</span>
+            <span class="s0">if </span><span class="s1">(valor1.getText().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Dejaste en blanco el campo&quot;</span><span class="s0">,</span>
+                        <span class="s2">&quot;ERROR&quot; </span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                <span class="s1">num1=Double.parseDouble(valor1.getText())</span><span class="s0">;</span>
+                <span class="s0">if</span><span class="s1">(num1&gt;=</span><span class="s3">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">{</span>
+                    <span class="s1">resu = Math.sqrt(num1)</span><span class="s0">;</span>
+                    <span class="s1">resultado = String.valueOf(resu)</span><span class="s0">;</span>
+                    <span class="s1">camporesultado.setText(resultado)</span><span class="s0">;</span>
+                <span class="s1">}  {</span>
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Raiz negativa.&quot;</span><span class="s0">,</span>
+                            <span class="s2">&quot;ERROR&quot;</span><span class="s0">, </span><span class="s1">JOptionPane.ERROR_MESSAGE)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">if </span><span class="s1">(e.getSource() == btnlimpar){</span>
+            <span class="s1">valor1.setText(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">valor2.setText(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">camporesultado.setText(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">if</span><span class="s1">(e.getSource()== btnsalir) {</span>
+            <span class="s1">System.exit(</span><span class="s3">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+
+
+</pre>
+</body>
+</html>
